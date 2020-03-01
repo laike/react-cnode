@@ -1,0 +1,6 @@
+apps:
+  - script: ./server/server.js  #程序启动文件
+    name: cnode    #启动服务名（自定义）
+    env_production:   #生产环境
+      NODE_ENV: production
+      HOST: localhost
