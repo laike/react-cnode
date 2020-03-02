@@ -22,6 +22,7 @@ import {
   CircularProgress,
   Avatar,
   IconButton,
+  Typography,
   Paper,
   Fab,
 } from "@material-ui/core";
@@ -126,7 +127,7 @@ class TopicDetail extends React.Component {
     return (
       <Container>
         <Helmet>
-          <title>this is topic detail page </title>
+          <title>{topic.title} </title>
           <meta name="description" content="this is description" />
         </Helmet>
         <Card
@@ -144,8 +145,9 @@ class TopicDetail extends React.Component {
             </CardContent>
           </div>
         </Card>
-        <Paper>
-          {user.isLogin ? (
+
+        {/* 这个回复功能注释掉现在没有用，因为API不支持评论了 */}
+        {/* {user.isLogin ? (
             <div className={classes.mde}>
               <SimpleMDE
                 onChange={this.handleChange}
@@ -163,15 +165,21 @@ class TopicDetail extends React.Component {
                 <AddIcon />
               </Fab>
             </div>
-          ) : null}
+          ) : null} */}
+
+        <Paper>
+          <Typography color="secondary">最新评论：</Typography>
+          {topicStore.syncing ? null : topic.replies.map(reply => <Reply reply={reply} key={reply.id} />)}
         </Paper>
-        <Paper>{topicStore.syncing ? null : topic.replies.map(reply => <Reply reply={reply} key={reply.id} />)}</Paper>
         {topicStore.syncing ? (
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              background: "red",
+              height: 500,
+              width: 500,
             }}>
             <CircularProgress color="primary" size={50} />
           </div>

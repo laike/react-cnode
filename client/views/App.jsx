@@ -4,6 +4,8 @@ import _ from "lodash";
 import routes from "../config/router";
 import AppBar from "./layout/app-bar";
 import BottomBar from "./layout/bottom-bar";
+import { DEBUG_MODE } from "../config/config";
+import Stats from "stats.js";
 
 const App = () => {
   React.useEffect(() => {
@@ -11,6 +13,22 @@ const App = () => {
     const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
+    }
+    if (DEBUG_MODE) {
+      var stats = new Stats();
+      stats.showPanel(1); // 0: fps, 1: ms, 2: mb, 3+: custom
+      document.body.appendChild(stats.dom);
+
+      function animate() {
+        stats.begin();
+        // monitored code goes here
+
+        stats.end();
+
+        requestAnimationFrame(animate);
+      }
+
+      requestAnimationFrame(animate);
     }
   });
 

@@ -29,20 +29,7 @@ export function getLocalStorage(item) {
     }
     return localStorage.getItem(item);
   } catch (error) {
-    return {
-      isLogin: true,
-      token: "",
-      info: {},
-      detail: {
-        recentTopics: [],
-        recentReplies: [],
-        syncing: false,
-      },
-      collections: {
-        syncing: false,
-        list: [],
-      },
-    };
+    return {};
   }
 }
 

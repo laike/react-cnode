@@ -80,6 +80,7 @@ class TopicStore {
         resolve(this.detailMap[id]);
       } else {
         this.syncing = true;
+        console.log(`this.syncing is : `, this.syncing);
         get(`/topic/${id}`, {
           mdrender: false,
         })

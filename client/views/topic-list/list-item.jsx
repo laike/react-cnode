@@ -16,7 +16,8 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { tabs } from "../../untils/variable-define";
 import { TopicPrimaryStyle, TopicSecondaryStyle } from "./styles";
 import { dateFormate } from "../../untils/untils";
-
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 const Primary = ({ classes, topic }) => {
@@ -24,6 +25,7 @@ const Primary = ({ classes, topic }) => {
     [classes.tab]: true,
     [classes.top]: topic.top,
   });
+
   return (
     <div className={classes.root}>
       <span className={classnames}>{topic.top ? "置顶" : tabs[topic.tab]}</span>
@@ -51,6 +53,8 @@ const Secondary = ({ classes, topic }) => {
 const StyledSecondary = withStyles(TopicSecondaryStyle)(Secondary);
 const TopicListItem = ({ onClick, topic, topicStore, appState, tab }) => {
   const [collected, setCollected] = useState("primary");
+  const [open, setOpen] = useState(false);
+
   useEffect(() => {
     appState.user.collections.list.forEach(collect => {
       if (collect.id === topic.id) {
@@ -66,7 +70,7 @@ const TopicListItem = ({ onClick, topic, topicStore, appState, tab }) => {
       <ListItemText primary={<StyledPrimary topic={topic} />} secondary={<StyledSecondary topic={topic} />} />
       <ListItemSecondaryAction
         onClick={
-          collected
+          collected === "secondary"
             ? () => {
                 topicStore.unfavarite(topic.id, appState.user.token).then(res => {
                   if (res.success) {

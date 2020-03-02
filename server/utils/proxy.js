@@ -12,9 +12,10 @@ module.exports = function(req, res, next) {
       msg: "need login!",
     });
   }
-  const query = Object.assign({}, req.query, {
-    accesstoken: needAccessToken && req.method === "GET" ? user.accessToken : "",
-  });
+  // const query = Object.assign({}, req.query, {
+  //   accesstoken: needAccessToken && req.method === "GET" ? user.accessToken : "",
+  // });
+  const query = Object.assign({}, req.query);
   if (query.needAccessToken) delete query.needAccessToken;
   axios(`${baseUrl}${path}`, {
     method: req.method,

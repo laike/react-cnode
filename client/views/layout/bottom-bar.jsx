@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 
 import { BottomNavigation, BottomNavigationAction } from "@material-ui/core";
-
+import MailIcon from "@material-ui/icons/Mail";
 import {
   Restore as RestoreIcon,
   Favorite as FavoriteIcon,
@@ -30,7 +30,7 @@ class BottomNavBar extends React.Component {
     super();
 
     this.state = {
-      value: "recents",
+      value: "Recents",
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -50,22 +50,29 @@ class BottomNavBar extends React.Component {
         }}
         className={classes.bottom}>
         <BottomNavigationAction
-          label="Recents"
-          value="recents"
+          label=" 热门动态"
+          value="Recents"
           icon={<RestoreIcon />}
           onClick={() => {
             history.push("/");
           }}
         />
         <BottomNavigationAction
-          label="Favorites"
-          value="favorites"
+          label="收藏"
+          value=" Favorites"
           icon={<FavoriteIcon />}
           onClick={() => {
             history.push("/user/info");
           }}
         />
-        <BottomNavigationAction label="Nearby" value="nearby" icon={<LocationOnIcon />} />
+        <BottomNavigationAction
+          label="消息中心"
+          value="email"
+          onClick={() => {
+            history.push("/message/info");
+          }}
+          icon={<MailIcon />}
+        />
       </BottomNavigation>
     );
   }

@@ -3,22 +3,29 @@ import { observable, computed, action, toJS } from "mobx";
 import { get, post } from "../untils/http";
 import { setLocalStorage, getLocalStorage } from "../untils/untils";
 export default class AppState {
-  @observable user = getLocalStorage("user")
-    ? getLocalStorage("user")
-    : {
-        isLogin: false,
-        token: "",
-        info: {},
-        detail: {
-          recentTopics: [],
-          recentReplies: [],
-          syncing: false,
-        },
-        collections: {
-          syncing: false,
-          list: [],
-        },
-      };
+  @observable user = Object.assign(
+    {
+      isLogin: false,
+      token: "",
+      info: {},
+      userInfo: {},
+      messagesAcount: 0,
+      detail: {
+        recentTopics: [],
+        recentReplies: [],
+        syncing: false,
+      },
+      collections: {
+        syncing: false,
+        list: [],
+      },
+      messages: {
+        syncing: false,
+        list: {},
+      },
+    },
+    getLocalStorage("user"),
+  );
 
   @action setUser(user) {
     this.user = user;
@@ -96,6 +103,93 @@ export default class AppState {
     });
   }
 
+  @action getMessages(mdrender = true) {
+    this.user.messages.syncing = true;
+    console.log(this.user.token);
+    return new Promise((resolve, reject) => {
+      get(`/messages`, {
+        accesstoken: this.user.token,
+        mdrender,
+      })
+        .then(resp => {
+          if (resp.success) {
+            this.user.messages.list = resp.data;
+            resolve(resp.data);
+          }
+          this.user.messages.syncing = false;
+        })
+        .catch(err => {
+          this.user.messages.syncing = true;
+          reject(err);
+        });
+    });
+  }
+  @action getMessagesAcount() {
+    return new Promise((resolve, reject) => {
+      get(`/message/count`, {
+        accesstoken: this.user.token,
+      })
+        .then(res => {
+          this.messagesAcount = res.data;
+          if (res.success) {
+            resolve(res.data);
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  @action messageMarkAll() {
+    return new Promise((resolve, reject) => {
+      post(
+        " /message/mark_all",
+        {},
+        {
+          accesstoken: this.user.token,
+        },
+      )
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+  @action messageMarkOne(id) {
+    return new Promise((resolve, reject) => {
+      post(
+        `/message/mark_all/${id}`,
+        {},
+        {
+          accesstoken: this.user.token,
+        },
+      )
+        .then(res => {
+          resolve(res);
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
+
+  @action getUserInfo(username = "") {
+    return new Promise((resolve, reject) => {
+      get(`/user/${username}`, {})
+        .then(res => {
+          this.userinfo = res.data;
+          if (res.success) {
+            resolve(res.data);
+          }
+        })
+        .catch(err => {
+          reject(err);
+        });
+    });
+  }
   toJson() {
     return {
       user: toJS(this.user),

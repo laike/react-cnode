@@ -6,7 +6,8 @@ import { inject, observer } from "mobx-react";
 import { withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { AppBar, Toolbar, Button, IconButton, Typography } from "@material-ui/core";
-
+import Badge from "@material-ui/core/Badge";
+import MailIcon from "@material-ui/icons/Mail";
 import { Home } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 
@@ -37,15 +38,28 @@ class MaiAppBar extends React.Component {
   // eslint-disable-next-line class-methods-use-this
   onCreateClick() {}
 
+  componentDidMount() {
+    const { appState } = this.props;
+    //调用api
+    appState.getMessagesAcount().then(res => {
+      //console.log(res);
+    });
+    //同时获取当前登录用户的信息
+    appState.getUserInfo(appState.user.info.loginname).then(res => {
+      console.log(res);
+    });
+    console.log("msssage list ", appState.user.messages);
+  }
   render() {
     const { classes, appState, history } = this.props;
-    let { user } = appState;
+    let { user, messagesAcount } = appState;
+    console.log(user);
     return (
       <div className={classes.root}>
         <AppBar position="fixed">
           <Toolbar>
             <Grid container>
-              <Grid item xs={10}>
+              <Grid item xs={9}>
                 <IconButton
                   color="secondary"
                   onClick={() => {
@@ -63,18 +77,18 @@ class MaiAppBar extends React.Component {
                   CNode
                 </Button>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item xs={3}>
                 <Button
                   color="secondary"
                   variant="text"
                   onClick={() => {
-                    console.log(user);
-                    return;
-                    history.push("/create/topic");
+                    history.push("/message/info");
                   }}>
-                  新建话题
+                  未读消息
                 </Button>
-
+                <Badge badgeContent={messagesAcount ? messagesAcount : 0} color="secondary">
+                  <MailIcon color="secondary" />
+                </Badge>
                 {user.isLogin ? (
                   <Button
                     color="secondary"

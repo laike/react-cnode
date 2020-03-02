@@ -12,6 +12,8 @@ import Login from "../views/user/login";
 
 import NotFound from "../views/NotFound";
 
+import Message from "../views/message/index";
+
 import UserInfo from "../views/user/info";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
@@ -59,12 +61,14 @@ AuthorizationComponent.defaultTypes = {
 const routes = [
   <ConnnectAuthorizationComponent
     Component={TopicList}
+    key={"index"}
     isLogin={true}
     path="/"
     exact={true}
     loadData={TopicList.loadData}
   />,
   <ConnnectAuthorizationComponent
+    key={"firsttab"}
     Component={TopicList}
     isLogin={true}
     path="/first/:tab"
@@ -74,6 +78,7 @@ const routes = [
     isLogin={true}
     Component={TopicList}
     path="/list/:tab"
+    key={"listtab"}
     loadData={TopicList.loadData}
   />,
   <ConnnectAuthorizationComponent
@@ -86,6 +91,7 @@ const routes = [
   <ConnnectAuthorizationComponent Component={Login} path="/user/login" key="login" />,
   <ConnnectAuthorizationComponent Component={UserInfo} path="/user/info" key="userinfo" />,
   <ConnnectAuthorizationComponent Component={CreateTopic} path="/create/topic" key="CreateTopic" />,
+  <ConnnectAuthorizationComponent Component={Message} path="/message/info" key="message" />,
   // {
   //   component: NotFound
   // }
