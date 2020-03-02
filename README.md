@@ -9,11 +9,8 @@
 # Warning: validateDOMNesting(...): <p> cannot appear as a descendant of <p>.
 
 解决方案：
-<Typography>
-
-<p>最近没有发布的新话题</p>
-</Typography>
-删除Typography组件里面的p标签
+`<Typography><p>最近没有发布的新话题</p></Typography>`
+删除 Typography 组件里面的 p 标签
 
 # 开发中遇到热更新 需要刷新整个页面的问题主要是 因为热更新的 json 文件没有成功获取，最后
 
@@ -50,4 +47,12 @@ publicPath: '/public'
 
 # 还遇到了服务器端渲染不正常的问题，问题在 client 浏览器端文件夹里面用到了服务器端没有办法识别的东西比如路由拦截
 
-``
+解决办法单独为 ssr 端设置一个路由器配置文件
+
+# 关于 express 端数据持久化的问题，因为 express session 每次会话完毕或者服务器端重启后就没有了用户又要重新登录，所以引出了 session 持久化
+
+解决办法：可以选择 redis 或者 MongoDB 的中间件，来进行持久化存储。
+
+# 关于打包后还是有 5M 左右大小
+
+解决方案：把不是必须 dependence 的包 移动到 dev dependencies 探索 webpack 里面的更多优化配置。
