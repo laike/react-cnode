@@ -5,7 +5,6 @@ import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
 
 import { Avatar, Typography, TextField, Button, Paper, Snackbar, IconButton, SnackbarContent } from "@material-ui/core";
-import { amber, green } from "@material-ui/core/colors";
 import { VerifiedUser as UserIcon, CheckCircle, Warning, Error, Info, Close, ArrowUpward } from "@material-ui/icons";
 
 import { withStyles } from "@material-ui/core/styles";
@@ -15,8 +14,6 @@ import { Helmet } from "react-helmet";
 import AppState from "../../store/app-state";
 
 import { loginStyels } from "./styles/login";
-
-import qs from "query-string";
 
 // 引入login 和 user 两个组件 根据登录状态进行切换
 

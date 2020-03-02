@@ -18,7 +18,7 @@ import UserInfo from "../views/user/info";
 import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
 //这里我们要创建一个HOC组件用来拦截用户是否登录
-const AuthorizationComponent = ({ isLogin, Component, ...rest }) => {
+const AuthorizationComponent = ({ isLogin = true, Component, ...rest }) => {
   return (
     <Route
       {...rest}
@@ -42,7 +42,6 @@ const AuthorizationComponent = ({ isLogin, Component, ...rest }) => {
 
 const ConnnectAuthorizationComponent = withRouter(
   inject(stores => {
-    console.log();
     return {
       isLogin: stores.appState.user.isLogin,
     };
@@ -53,42 +52,13 @@ AuthorizationComponent.propTypes = {
   isLogin: PropTypes.bool,
 };
 
-AuthorizationComponent.defaultTypes = {
-  isLogin: false,
-};
-
 //有三个页面设置为true 表示不用登录即可查看
 const routes = [
-  <ConnnectAuthorizationComponent
-    Component={TopicList}
-    key={"index"}
-    isLogin={true}
-    path="/"
-    exact={true}
-    loadData={TopicList.loadData}
-  />,
-  <ConnnectAuthorizationComponent
-    key={"firsttab"}
-    Component={TopicList}
-    isLogin={true}
-    path="/first/:tab"
-    loadData={TopicList.loadData}
-  />,
-  <ConnnectAuthorizationComponent
-    isLogin={true}
-    Component={TopicList}
-    path="/list/:tab"
-    key={"listtab"}
-    loadData={TopicList.loadData}
-  />,
-  <ConnnectAuthorizationComponent
-    Component={TopicDetail}
-    path="/detail/:id"
-    key="detail"
-    loadData={TopicDetail.loadData}
-  />,
-  <ConnnectAuthorizationComponent Component={ApiTest} path="/test" key="test" />,
-  <ConnnectAuthorizationComponent Component={Login} path="/user/login" key="login" />,
+  <Route component={TopicList} key={"index"} path="/" exact={true} loadData={TopicList.loadData} />,
+  <Route component={TopicList} path="/list/:tab" key={"listtab"} loadData={TopicList.loadData} />,
+  <Route component={TopicDetail} path="/detail/:id" key="detail" loadData={TopicDetail.loadData} />,
+  <Route component={ApiTest} path="/test" key="test" />,
+  <Route component={Login} path="/user/login" key="login" />,
   <ConnnectAuthorizationComponent Component={UserInfo} path="/user/info" key="userinfo" />,
   <ConnnectAuthorizationComponent Component={CreateTopic} path="/create/topic" key="CreateTopic" />,
   <ConnnectAuthorizationComponent Component={Message} path="/message/info" key="message" />,

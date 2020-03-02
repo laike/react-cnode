@@ -5,23 +5,13 @@ import { observer, inject } from "mobx-react";
 import PropTypes from "prop-types";
 
 import { withRouter } from "react-router";
-import {
-  Button,
-  Tabs,
-  Tab,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemText,
-  CircularProgress,
-} from "@material-ui/core";
 
-import queryString from "query-string";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import List from "@material-ui/core/List";
 
 import { Helmet } from "react-helmet";
-
-import AppState from "../../store/app-state";
 
 import Container from "../layout/container";
 
@@ -140,7 +130,7 @@ TopicList.propTypes = {
 };
 TopicList.loadData = (store, query) => {
   let { tab } = query;
-  tab = tab !== "favicon.ico" ? tab : "all";
-  return store.topicStore.fetchTopics(tab || "all");
+  tab = tab ? tab : "all";
+  return store.topicStore.fetchTopics(tab);
 };
 export default withRouter(TopicList);

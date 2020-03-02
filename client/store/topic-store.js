@@ -113,7 +113,7 @@ class TopicStore {
     return new Promise((resolve, reject) => {
       post(
         "/topic_collect/collect",
-        {},
+        { needAccessToken: true },
         {
           accesstoken: token,
           topic_id: topicId,
@@ -136,7 +136,7 @@ class TopicStore {
     return new Promise((resolve, reject) => {
       post(
         "/topic_collect/de_collect",
-        {},
+        { needAccessToken: true },
         {
           accesstoken: token,
           topic_id: topicId,

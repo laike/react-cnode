@@ -105,9 +105,10 @@ export default class AppState {
 
   @action getMessages(mdrender = true) {
     this.user.messages.syncing = true;
-    console.log(this.user.token);
+
     return new Promise((resolve, reject) => {
       get(`/messages`, {
+        needAccessToken: true,
         accesstoken: this.user.token,
         mdrender,
       })
@@ -127,6 +128,7 @@ export default class AppState {
   @action getMessagesAcount() {
     return new Promise((resolve, reject) => {
       get(`/message/count`, {
+        needAccessToken: true,
         accesstoken: this.user.token,
       })
         .then(res => {
@@ -145,7 +147,7 @@ export default class AppState {
     return new Promise((resolve, reject) => {
       post(
         " /message/mark_all",
-        {},
+        { needAccessToken: true },
         {
           accesstoken: this.user.token,
         },
@@ -162,7 +164,7 @@ export default class AppState {
     return new Promise((resolve, reject) => {
       post(
         `/message/mark_all/${id}`,
-        {},
+        { needAccessToken: true },
         {
           accesstoken: this.user.token,
         },

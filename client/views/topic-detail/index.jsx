@@ -12,36 +12,19 @@ import hljs from "highlight.js";
 
 import "../../css/github.css";
 
-import {
-  Card,
-  CardHeader,
-  CardActions,
-  CardActionArea,
-  CardContent,
-  CardMedia,
-  CircularProgress,
-  Avatar,
-  IconButton,
-  Typography,
-  Paper,
-  Fab,
-} from "@material-ui/core";
+import { Card, CardHeader, CardContent, Avatar, Typography, Paper } from "@material-ui/core";
 
-import { MoreVertIcon, Add as AddIcon } from "@material-ui/icons";
-
-import queryString from "query-string";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { Helmet } from "react-helmet";
 
 import { withStyles } from "@material-ui/core/styles";
-import SimpleMDE from "react-simplemde-editor";
-import AppState from "../../store/app-state";
+// import SimpleMDE from "react-simplemde-editor";
 
 import Container from "../layout/container-detail";
 
 import Reply from "./reply_simple";
 
-import { tabs } from "../../untils/variable-define";
 import { ContentStyle } from "./styles";
 
 const md = MarkdowIt({

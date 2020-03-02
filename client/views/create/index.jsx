@@ -24,11 +24,9 @@ import {
   RadioButtonChecked as RadioButtonCheckedIcon,
 } from "@material-ui/icons";
 
-import { green } from "@material-ui/core/colors";
-
 import { Helmet } from "react-helmet";
 
-import SimpleMDE from "react-simplemde-editor";
+// import SimpleMDE from "react-simplemde-editor";
 import AppState from "../../store/app-state";
 import { ContentStyle } from "./styles";
 import Container from "../layout/container";
@@ -97,7 +95,7 @@ class TopicList extends React.Component {
           <Divider />
           {user.isLogin ? (
             <div className={classes.mde}>
-              <SimpleMDE
+              {/* <SimpleMDE
                 onChange={this.handleChange}
                 id="simplereactmde"
                 value={mdeValue}
@@ -108,7 +106,7 @@ class TopicList extends React.Component {
                     delay: 1000,
                   },
                 }}
-              />
+              /> */}
               <Fab color="secondary" aria-label="add" className={classes.iconHover}>
                 <AddIcon />
               </Fab>

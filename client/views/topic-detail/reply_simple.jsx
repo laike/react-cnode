@@ -1,47 +1,36 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {
-  Grid,
-  ButtonBase,
-  Paper,
-  Typography
-} from '@material-ui/core'
-import dateFormat from 'dateformat'
-import {
-  MoreVertIcon,
-  ExpandMoreIcon,
-  ShareIcon,
-  FavoriteIcon
-} from '@material-ui/icons'
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles'
-import md from 'marked'
-
+import React from "react";
+import PropTypes from "prop-types";
+import { Grid, ButtonBase, Paper, Typography } from "@material-ui/core";
+import dateFormat from "dateformat";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import md from "marked";
 
 function getMarkdownText(mark) {
-  let rawMarkup = md(mark)
-  return { __html: rawMarkup }
+  let rawMarkup = md(mark);
+  return { __html: rawMarkup };
 }
-const useStyles = makeStyles((theme) => createStyles({
-  root: {
-    flexGrow: 1,
-  },
-  paper: {
-    padding: theme.spacing(2),
-    margin: '10px auto',
-  },
-  image: {
-    width: 60,
-    height: 60,
-  },
-  img: {
-    margin: 'auto',
-    display: 'block',
-    maxWidth: '100%',
-    maxHeight: '100%',
-    borderRadius: '50%'
-  },
-}),);
-
+const useStyles = makeStyles(theme =>
+  createStyles({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: "10px auto",
+    },
+    image: {
+      width: 60,
+      height: 60,
+    },
+    img: {
+      margin: "auto",
+      display: "block",
+      maxWidth: "100%",
+      maxHeight: "100%",
+      borderRadius: "50%",
+    },
+  }),
+);
 
 export default function Reply({ reply }) {
   const classes = useStyles();
@@ -58,14 +47,11 @@ export default function Reply({ reply }) {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1">
-                   {dateFormat(reply.create_at, 'dddd, mmmm dS, yyyy, h:MM:ss TT')}
+                  {dateFormat(reply.create_at, "dddd, mmmm dS, yyyy, h:MM:ss TT")}
                 </Typography>
                 <Typography variant="body2" gutterBottom>
-                 <p
-                   dangerouslySetInnerHTML={getMarkdownText(reply.content)}
-                 />
+                  <p dangerouslySetInnerHTML={getMarkdownText(reply.content)} />
                 </Typography>
-
               </Grid>
               <Grid item>
                 {/* <Typography variant="body2" style={{ cursor: 'pointer' }}>
@@ -83,7 +69,6 @@ export default function Reply({ reply }) {
   );
 }
 
-
 Reply.propTypes = {
-  reply: PropTypes.object.isRequired
-}
+  reply: PropTypes.object.isRequired,
+};

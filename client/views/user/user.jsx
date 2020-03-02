@@ -4,18 +4,6 @@ import { observer, inject } from "mobx-react";
 
 import PropTypes from "prop-types";
 
-import {
-  Button,
-  Tabs,
-  Tab,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemText,
-  CircularProgress,
-} from "@material-ui/core";
-
 import { Helmet } from "react-helmet";
 
 import AppState from "../../store/app-state";

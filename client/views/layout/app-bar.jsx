@@ -40,15 +40,18 @@ class MaiAppBar extends React.Component {
 
   componentDidMount() {
     const { appState } = this.props;
-    //调用api
-    appState.getMessagesAcount().then(res => {
-      //console.log(res);
-    });
-    //同时获取当前登录用户的信息
-    appState.getUserInfo(appState.user.info.loginname).then(res => {
-      console.log(res);
-    });
-    console.log("msssage list ", appState.user.messages);
+    //如果登录再调用
+    if (appState.user.isLogin) {
+      //调用api
+      appState.getMessagesAcount().then(res => {
+        //console.log(res);
+      });
+      //同时获取当前登录用户的信息
+      appState.getUserInfo(appState.user.info.loginname).then(res => {
+        console.log(res);
+      });
+      console.log("msssage list ", appState.user.messages);
+    }
   }
   render() {
     const { classes, appState, history } = this.props;

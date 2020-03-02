@@ -1,23 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {
-  ListItem,
-  ListItemAvatar,
-  ListItemIcon,
-  ListItemText,
-  Avatar,
-  withStyles,
-  makeStyles,
-} from "@material-ui/core";
-import dateFormat from "dateformat";
-import { Home as HomeIcon } from "@material-ui/icons";
+import { ListItem, ListItemAvatar, ListItemText, Avatar } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import { tabs } from "../../untils/variable-define";
 import { TopicPrimaryStyle, TopicSecondaryStyle } from "./styles";
 import { dateFormate } from "../../untils/untils";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import IconButton from "@material-ui/core/IconButton";
 const Primary = ({ classes, topic }) => {

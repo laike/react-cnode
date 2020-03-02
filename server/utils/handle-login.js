@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const axios = require("axios");
+const queryString = require("query-string");
 const baseUrl = "https://cnodejs.org/api/v1";
 
 router.post("/login", (req, res) => {
@@ -15,6 +16,7 @@ router.post("/login", (req, res) => {
           id: resp.data.id,
           avatarUrl: resp.data.avatar_url,
         };
+        console.log(`我已经登录成功token是: `, req.session.user);
         res.json({
           success: true,
           data: resp.data,

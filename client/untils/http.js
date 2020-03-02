@@ -19,9 +19,22 @@ function parseUrl(url, params) {
 
 export const get = (url, params) => {
   return new Promise((resolve, reject) => {
-    HttpManager.get(url, {
-      params,
-    })
+    //   HttpManager.get(url, {
+    //     params,
+    //   })
+    //     .then(resp => {
+    //       const { data } = resp;
+    //       if (data && data.success === true) {
+    //         resolve(data);
+    //       } else {
+    //         reject(data);
+    //       }
+    //     })
+    //     .catch(reject);
+    // });
+
+    axios
+      .get(parseUrl(url, params))
       .then(resp => {
         const { data } = resp;
         if (data && data.success === true) {
@@ -32,37 +45,11 @@ export const get = (url, params) => {
       })
       .catch(reject);
   });
-
-  // 下面这种保留以后可能有用
-  //   axios
-  //     .get(parseUrl(url, params))
-  //     .then(resp => {
-  //       const { data } = resp;
-  //       if (data && data.success === true) {
-  //         resolve(data);
-  //       } else {
-  //         reject(data);
-  //       }
-  //     })
-  //     .catch(reject);
-  // });
 };
 
 export const post = (url, params, data1) => {
   return new Promise((resolve, reject) => {
-    HttpManager.post(url, { params }, qs.stringify(Object.assign({}, data1)))
-      .then(resp => {
-        const { data } = resp;
-        if (data && data.success === true) {
-          resolve(data);
-        } else {
-          reject(data);
-        }
-      })
-      .catch(reject);
-
-    // axios
-    //   .post(parseUrl(url, params), data1)
+    // HttpManager.post(url, { params }, qs.stringify(Object.assign({}, data1)))
     //   .then(resp => {
     //     const { data } = resp;
     //     if (data && data.success === true) {
@@ -72,5 +59,17 @@ export const post = (url, params, data1) => {
     //     }
     //   })
     //   .catch(reject);
+
+    axios
+      .post(parseUrl(url, params), data1)
+      .then(resp => {
+        const { data } = resp;
+        if (data && data.success === true) {
+          resolve(data);
+        } else {
+          reject(data);
+        }
+      })
+      .catch(reject);
   });
 };
