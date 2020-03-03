@@ -51,7 +51,8 @@ publicPath: '/public'
 
 # 关于 express 端数据持久化的问题，因为 express session 每次会话完毕或者服务器端重启后就没有了用户又要重新登录，所以引出了 session 持久化
 
-解决办法：可以选择 redis 或者 MongoDB 的中间件，来进行持久化存储。
+解决办法：可以选择 redis 或者 MongoDB 的中间件，来进行持久化存储。或者其他方案如下，如果真正上线服务，还是要用 redius
+https://blog.csdn.net/chaoyangsun/article/details/79240888
 
 # 关于打包后还是有 5M 左右大小
 

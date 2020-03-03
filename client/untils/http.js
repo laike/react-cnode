@@ -1,12 +1,12 @@
 import axios from "axios";
 import qs from "query-string";
 const baseUrl = process.env.API_BASE || "";
-const HttpManager = axios.create({
-  baseURL: "https://cnodejs.org/api/v1",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+// const HttpManager = axios.create({
+//   baseURL: "https://cnodejs.org/api/v1",
+//   headers: {
+//     "Content-Type": "application/x-www-form-urlencoded",
+//   },
+// });
 
 function parseUrl(url, params) {
   const str = Object.keys(params).reduce((result, key) => {

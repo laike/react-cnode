@@ -21,6 +21,15 @@ import routes from "./config/serverRouter";
 import AppBar from "./views/layout/app-bar";
 import BottomBar from "./views/layout/bottom-bar";
 import _ from "lodash";
+//用于session持久化的库
+import FileStore from "session-file-store";
+const FileStoreSession = FileStore(session);
+// 创建 session 中间件
+const sessionMiddleware = session({
+  store: new FileStoreSession(), //数据持久化方式，这里表示本地文件存储
+  secret: "windke", //加密key 可以随意书写
+  cookie: { maxAge: 60000 }, //两次请求的时间差 即超过这个时间再去访问 session就会失效
+});
 const app = express();
 const isDev = process.env.NODE_ENV === "development";
 
@@ -43,11 +52,7 @@ const getTemplate = () => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(
-  session({
-    name: "windke",
-    saveUninitialized: false,
-    secret: "react cnode class",
-  }),
+  sessionMiddleware, //注入中间件
 );
 // app.use(favicon(path.join(__dirname, 'favicon.ico')))
 
